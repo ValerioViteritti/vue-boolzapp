@@ -37,8 +37,20 @@ body{
     height: calc(100% / 20 * 2);
 }
 
+.fa-bell-slash{
+    background-color: white;
+    color: #8edafc;
+    border-radius: 50%;
+    margin: 0 1rem;
+    
+}
+
+#notifiche-on-off a{
+    color: grey;
+}
+
 #barra-ricerca{
-    background-color: #ffffff;
+    background-color:#fafafa;
     height: calc(100% / 20 * 1);
 }
 
@@ -71,8 +83,8 @@ body{
 
 #barra-messaggio{
     background-color: #ffffff;
-    border-radius: 15px;
-    padding: 0 10px;
+    border-radius: 1rem;
+    padding: 0 1rem;
 }
 
 #barra-messaggio:hover{

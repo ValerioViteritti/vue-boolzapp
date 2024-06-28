@@ -23,16 +23,44 @@
     <div id="app">
         <div class="container d-flex justify-center align-items-center">
             <div class="row">
+                <!-- LEFT -->
                 <div id="col-left" class="col-lg-4 col-md-4 col-sm-4">
-                    <div id="profilo-utente"></div>
-                    <div id="notifiche-on-off"></div>
-                    <div id="barra-ricerca"></div>
+                    <!-- UTENTE -->
+                    <div id="profilo-utente">
+                        <div class="float-left h-100">
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="float-right h-100">
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                        </div>
+                    </div>
+                    <!-- NOTIFICHE -->
+                    <div id="notifiche-on-off" class="d-flex justify-start align-items-center">
+                        <i class="fa-solid fa-bell-slash f-size-1rem p-2 pointer"></i>
+                        <div>
+                            <div class="f-size-0-75rem pointer">Ricevi notifiche di nuovi messaggi</div>
+                            <a href="#" class="f-size-0-75rem">Attiva notifiche desktop</a>
+                        </div>
+                        
+                    </div>
+                    <!-- BARRA RICERCA -->
+                    <div id="barra-ricerca">
+                        <input type="text" name="" id="barra-messaggio" class="w-100">
+                    </div>
+                    <!-- CONTATTI -->
                     <div id="contatti"></div>
 
                 </div>
+                <!-- RIGHT -->
                 <div id="col-right" class="col-lg-8 col-md-8 col-sm-8">
+                    <!-- CONTATTO ATTIVO -->
                     <div id="contatto-attivo"></div>
+                    <!-- SCHERMATA MESSAGGI -->
                     <div id="messaggistica"></div>
+                    <!-- BARRA DI INSERIMENTO NUOVI MESSAGGI -->
                     <div id="barra-inserimento" class=" d-flex">
                         <div class="col-lg-1 col-md-1 col-sm-1 h-100 d-flex justify-center align-items-center">
                             <i class="fa-regular fa-smile f-size-2rem pointer"></i>
