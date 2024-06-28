@@ -1,0 +1,21 @@
+body{
+    height: 100vh;
+}
+#app{
+    height: 100%;
+    
+}
+.container{
+    height: 100%;
+    background-color: #009688;
+    background: linear-gradient(
+        180deg,
+        #009688 16%,
+        #dbdbd3 16%
+    );
+}
+.row{
+    background-color: #eaeaea;
+    height: 92%;
+    width: 80%;
+}
