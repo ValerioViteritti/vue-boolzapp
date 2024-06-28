@@ -17,5 +17,54 @@ body{
 .row{
     background-color: #eaeaea;
     height: 92%;
-    width: 80%;
+    width: 86%;
+}
+/* COLONNA SINISTRA */
+#col-left{
+    background-color: #ffffff;
+    padding: 0;
+
+}
+
+#profilo-utente{
+    background-color: #eaeaea;
+    height: calc(100% / 20 * 2);
+
+}
+
+#notifiche-on-off{
+    background-color: #8edafc;
+    height: calc(100% / 20 * 2);
+}
+
+#barra-ricerca{
+    background-color: #ffffff;
+    height: calc(100% / 20 * 1);
+}
+
+#contatti{
+    background-color: #ffffff;
+    height: calc(100% / 20 * 15);
+}
+
+/* COLONNA DESTRA */
+#col-right{
+    background-color: #e5ddd5;
+    padding: 0;
+
+}
+
+#contatto-attivo{
+    background-color: #eaeaea;
+    height: calc(100% / 20 * 2);
+}
+
+#messaggistica{
+    background-image: ;
+    height: calc(100% / 20 * 16);
+}
+
+#barra-inserimento-messaggio{
+    background-color: #f3eeea;
+    height: calc(100% / 20 * 2);
 }
