@@ -64,7 +64,17 @@ body{
     height: calc(100% / 20 * 16);
 }
 
-#barra-inserimento-messaggio{
+#barra-inserimento{
     background-color: #f3eeea;
     height: calc(100% / 20 * 2);
+}
+
+#barra-messaggio{
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 0 10px;
+}
+
+#barra-messaggio:hover{
+    border: 2px solid greenyellow;
 }
