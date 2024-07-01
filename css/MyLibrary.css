@@ -345,6 +345,52 @@ p {
 .order-first { order: -1; }
 .order-last { order: 999; }
 
+/* Libreria di Gap Flex */
+.gap-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap, 1rem); /* Variabile personalizzabile per il gap */
+  }
+  
+  .gap-item {
+    flex: 1 1 auto; /* Gli elementi flessibili si adattano allo spazio disponibile */
+    margin: var(--item-margin, 0.5rem); /* Margine personalizzabile per ogni elemento */
+  }
+  
+  /* Opzionale: Classi per diversi valori di gap */
+  .gap-small {
+    --gap: 0.5rem;
+  }
+  
+  .gap-medium {
+    --gap: 1rem;
+  }
+  
+  .gap-large {
+    --gap: 2rem;
+  }
+  
+  /* Opzionale: Classi per margini personalizzati degli elementi */
+  .margin-small {
+    --item-margin: 0.25rem;
+  }
+  
+  .margin-medium {
+    --item-margin: 0.5rem;
+  }
+  
+  .margin-large {
+    --item-margin: 1rem;
+  }
+  
+
+
+
+
+
+
+
+
 .h-60 { height: 60%; }
 .h-70 { height: 70%; }
 .h-80 { height: 80%; }

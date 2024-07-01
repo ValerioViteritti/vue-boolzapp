@@ -19,6 +19,11 @@ body{
     height: 92%;
     width: 86%;
 }
+
+img{
+    height: 50px;
+    border-radius: 50%;
+}
 /* COLONNA SINISTRA */
 #col-left{
     background-color: #ffffff;
