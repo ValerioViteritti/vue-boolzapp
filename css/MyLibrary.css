@@ -409,3 +409,7 @@ p {
 
 .float-left { float: left; }
 .float-right { float: right; }
+
+.pos-relative{
+    position: relative;
+}
