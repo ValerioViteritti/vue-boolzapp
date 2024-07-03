@@ -1,11 +1,12 @@
-body{
+body {
     height: 100vh;
 }
-#app{
+
+#app {
     height: 100%;
-    
 }
-.container{
+
+.container {
     height: 100%;
     background-color: #009688;
     background: linear-gradient(
@@ -14,75 +15,78 @@ body{
         #dbdbd3 16%
     );
 }
-.row{
+
+.row {
     background-color: #eaeaea;
     height: 92%;
     width: 86%;
 }
 
-img{
+img {
     height: 50px;
     width: 50px;
     border-radius: 50%;
-    
 }
 
-.fa-regular, .fa-solid{
+.fa-regular,
+.fa-solid {
     color: #adadad;
 }
 
 /* COLONNA SINISTRA */
-#col-left{
+#col-left {
     background-color: #ffffff;
     padding: 0;
-
 }
 
-#profilo-utente{
+#profilo-utente {
     background-color: #eaeaea;
     height: calc(100% / 20 * 2);
     border-right: 1px solid rgb(209, 209, 209);
-
 }
 
-#notifiche-on-off{
+#notifiche-on-off {
     background-color: #8edafc;
     height: calc(100% / 20 * 2);
 }
 
-.fa-bell-slash{
+.fa-bell-slash,
+.fa-bell {
     background-color: white;
     color: #8edafc;
     border-radius: 50%;
     margin: 0 1rem;
-    
 }
 
-#notifiche-on-off a{
+#notifiche-on-off a {
     color: grey;
 }
 
-#barra-ricerca{
-    background-color:#fafafa;
+#barra-ricerca {
+    background-color: #fafafa;
     height: calc(100% / 20 * 1);
     position: relative;
 }
 
-#barra-ricerca input{
+#barra-ricerca input {
     width: 100%;
-    padding-left: 2.5rem; /* spazio per l'icona */
+    padding-left: 2.5rem;
+    /* spazio per l'icona */
     box-sizing: border-box;
     background-color: #ffffff;
 }
 
-#barra-ricerca .fa-magnifying-glass{
+#barra-ricerca .fa-magnifying-glass {
+    position: absolute;
     top: 50%;
-    left: 15px; /* distanza dal bordo sinistro */
+    left: 15px;
+    /* distanza dal bordo sinistro */
     transform: translateY(-50%);
-    color: #ccc; /* colore dell'icona */
+    color: #ccc;
+    /* colore dell'icona */
 }
 
-#barra-cerca-utente{
+#barra-cerca-utente {
     background-color: #ffffff;
     border-radius: 0.5rem;
     padding: 0 1rem;
@@ -90,34 +94,34 @@ img{
     border-color: #ffffff;
 }
 
-#barra-cerca-utente:hover{
+#barra-cerca-utente:hover {
     border: 2px solid greenyellow;
 }
 
-#contatti{
+#contatti {
     background-color: #ffffff;
     height: calc(100% / 20 * 15);
     overflow-y: scroll;
 }
 
 /* COLONNA DESTRA */
-#col-right{
+#col-right {
     background-color: #e5ddd5;
     padding: 0;
 }
 
-#contatto-attivo{
+#contatto-attivo {
     background-color: #eaeaea;
     height: calc(100% / 20 * 2);
 }
 
-#messaggistica{
-    background-image: url("../img/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+#messaggistica {
+    background-image: url("28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
     height: calc(100% / 20 * 16);
     overflow-y: scroll;
 }
 
-#risposta-utente{
+.message-user {
     min-height: 50px;
     min-width: 200px;
     max-width: 600px;
@@ -126,9 +130,10 @@ img{
     margin-top: 10px;
     margin-right: 30px;
     padding: 5px 15px;
+    position: relative;
 }
 
-#risposta-contatto-attivo{
+.message-contact {
     min-height: 50px;
     min-width: 200px;
     max-width: 600px;
@@ -137,32 +142,96 @@ img{
     margin-top: 10px;
     margin-left: 30px;
     padding: 5px 15px;
+    position: relative;
 }
 
-.orario-messaggio-utente{
+.orario-messaggio-utente {
     color: #ccc;
+    position: absolute;
     top: 80%;
     right: 4%;
 }
 
-.orario-messaggio-contatto{
+.orario-messaggio-contatto {
     color: #ccc;
+    position: absolute;
     top: 79%;
     left: 90%;
 }
 
-#barra-inserimento{
+#barra-inserimento {
     background-color: #f3eeea;
     height: calc(100% / 20 * 2);
 }
 
-#barra-messaggio{
+#barra-messaggio {
     background-color: #ffffff;
     border-radius: 1rem;
     padding: 0 1rem;
     border-color: #ffffff;
 }
 
-#barra-messaggio:hover{
+#barra-messaggio:hover {
     border: 2px solid greenyellow;
+}
+
+/* Stili per la conferma di cancellazione */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.modal button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal button:first-of-type {
+    background: #dc3545;
+    color: white;
+}
+
+.modal button:last-of-type {
+    background: #6c757d;
+    color: white;
+}
+
+/* Stili per il menu a tendina */
+.message-container {
+    position: relative;
+}
+
+.dropdown {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 10;
+}
+
+.dropdown button {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 5px;
 }

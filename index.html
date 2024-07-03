@@ -12,9 +12,9 @@
     <!-- LINK CSS STYLE -->
     <link rel="stylesheet" href="css/style.css">
     <!-- LINK CSS LIBRARY -->
-    <link rel="stylesheet" href="./css/MyLibrary.css">
+    <link rel="stylesheet" href="css/MyLibrary.css">
     <!-- LINK JS LIBRARY -->
-    <script src="./js/MyLibrary.js"></script>
+    <script src="js/MyLibrary.js"></script>
     <!-- LINK VUE LAST VERSION -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     
@@ -28,9 +28,9 @@
                 <div id="col-left" class="col-lg-4 col-md-4 col-sm-4">
                     <!-- UTENTE -->
                     <div id="profilo-utente">
-                        <div class="float-left h-100 d-flex align-items-center ">
-                            <img src="img/download.png" alt="" class="gap-item">
-                            <span class="gap-item">Valerio</span>
+                        <div class="float-left h-100 d-flex align-items-center">
+                            <img :src="user.image" alt="User Image" class="gap-item">
+                            <span class="gap-item">{{ user.name }}</span>
                         </div>
                         <div class="float-right h-100 d-flex align-items-center">
                             <i class="fa-solid fa-circle-notch gap-item pointer"></i>
@@ -39,38 +39,37 @@
                         </div>
                     </div>
                     <!-- NOTIFICHE -->
-                    <div id="notifiche-on-off" class="d-flex justify-start align-items-center">
-                        <i class="fa-solid fa-bell-slash f-size-1rem p-2 pointer"></i>
+                    <div id="notifiche-on-off" class="d-flex justify-start align-items-center" @click="toggleNotifications">
+                        <i :class="notificationsEnabled ? 'fa-solid fa-bell f-size-1rem p-2 pointer' : 'fa-solid fa-bell-slash f-size-1rem p-2 pointer'"></i>
                         <div>
                             <div class="f-size-0-75rem pointer">Ricevi notifiche di nuovi messaggi</div>
-                            <a href="#" class="f-size-0-75rem">Attiva notifiche desktop</a>
+                            <a href="#" class="f-size-0-75rem">{{ notificationsEnabled ? 'Disattiva notifiche desktop' : 'Attiva notifiche desktop' }}</a>
                         </div>
-                        
                     </div>
                     <!-- BARRA RICERCA -->
                     <div id="barra-ricerca" class="d-flex align-items-center h-100">
-                        <i class="fa-solid fa-magnifying-glass pos-absolute"></i>
-                        <input type="text" name="" id="barra-cerca-utente" class="w-100 h-70" placeholder="Cerca o inizia una nuova chat">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" name="" id="barra-cerca-utente" class="w-100 h-70" placeholder="Cerca o inizia una nuova chat" v-model="searchQuery">
                     </div>
                     <!-- CONTATTI -->
                     <div id="contatti">
-                        <div class="contatto d-flex mt-1 ml-2">
-                            <img src="img/download.png" alt="" class="gap-item">
+                        <div v-for="contact in filteredContacts" @click="switchContact(contact)" class="contatto d-flex mt-1 ml-2 pointer">
+                            <img :src="contact.image" alt="Contact Image" class="gap-item">
                             <div>
-                                <div class="f-bold mt-2">Nome contatto</div>
-                                <span class="f-size-75">Ultimo messaggio inviato</span>
+                                <div class="f-bold mt-2">{{ contact.name }}</div>
+                                <span class="f-size-75">{{ contact.lastMessage }}</span>
+                                <div class="f-size-75">{{ contact.lastMessageTime }}</div>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!-- RIGHT -->
                 <div id="col-right" class="col-lg-8 col-md-8 col-sm-8">
                     <!-- CONTATTO ATTIVO -->
-                    <div id="contatto-attivo">
+                    <div v-if="activeContact" id="contatto-attivo">
                         <div class="float-left h-100 d-flex align-items-center">
-                            <img id="foto-contatto-attivo" src="img/download.png" alt="" class="gap-item">
-                            <span class="gap-item">Tizio</span>
+                            <img :src="activeContact.image" alt="Active Contact Image" class="gap-item">
+                            <span class="gap-item">{{ activeContact.name }}</span>
                         </div>
                         <div class="float-right h-100 d-flex align-items-center">
                             <i class="fa-solid fa-magnifying-glass gap-item pointer"></i>
@@ -80,41 +79,45 @@
                     </div>
                     <!-- SCHERMATA MESSAGGI -->
                     <div id="messaggistica">
-                        <div class="d-flex justify-end">
-                            <div id="risposta-utente" class="d-flex align-items-center pos-relative">fg ffghfg fh fgh fgh f <span class="orario-messaggio-utente f-size-50 pos-absolute">10:00</span></div>  
+                        <div v-for="(message, index) in getMessages()" :class="{'d-flex justify-end': message.sender === 'user', 'd-flex justify-start': message.sender === 'contact'}" class="message-container" @contextmenu.prevent="showDropdown(index, $event)">
+                            <div :class="message.sender === 'user' ? 'message-user' : 'message-contact'" class="d-flex align-items-center pos-relative">
+                                {{ message.content }} 
+                                <span :class="message.sender === 'user' ? 'orario-messaggio-utente f-size-50' : 'orario-messaggio-contatto f-size-50'">{{ message.time }}</span>
+                            </div>
+                            <div v-if="dropdownIndex === index" class="dropdown" :style="{ top: dropdownY + 'px', left: dropdownX + 'px' }">
+                                <button @click="confirmDeleteMessage(index)">Cancella</button>
+                            </div>
                         </div>
-                        <div class="d-flex justify-start">
-                            <div id="risposta-contatto-attivo" class="d-flex align-items-center pos-relative">cvbcvbcbcbcvbcbvc fgdfg dfg dfgdfgdff <span class="orario-messaggio-contatto f-size-50 pos-absolute">10:00</span></div>
-                        </div>
-                        
-                        
                     </div>
                     <!-- BARRA DI INSERIMENTO NUOVI MESSAGGI -->
-                    <div id="barra-inserimento" class=" d-flex">
+                    <div v-if="activeContact" id="barra-inserimento" class="d-flex">
                         <div class="col-lg-1 col-md-1 col-sm-1 h-100 d-flex justify-center align-items-center">
                             <i class="fa-regular fa-smile f-size-2rem pointer"></i>
                         </div>
                         <div class="col-lg-10 col-md-10 col-sm-10 h-100 d-flex justify-center align-items-center">
-                            <input type="text" id="barra-messaggio" class="h-70 w-100 pointer f-size-1-5rem" placeholder="Scrivi un messaggio">
+                            <input type="text" id="barra-messaggio" v-model="newMessage" @keyup.enter="sendMessage" class="h-70 w-100 pointer f-size-1-5rem" placeholder="Scrivi un messaggio">
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-1 h-100 d-flex justify-center align-items-center">
                             <i class="fa-solid fa-microphone f-size-2rem pointer"></i>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
 
+        <!-- Modal di conferma per cancellare i messaggi -->
+        <div v-if="showDeleteConfirm" class="modal-overlay">
+            <div class="modal">
+                <p>Sei sicuro di voler cancellare questo messaggio?</p>
+                <button @click="deleteMessage">Conferma</button>
+                <button @click="cancelDelete">Annulla</button>
+            </div>
+        </div>
     </div>
 
-    
-    
-
+    <!-- LINK JS LIBRARY -->
+    <script src="js/MyLibrary.js"></script>
     <!-- LINK JS MAIN -->
     <script src="js/main.js"></script>
-
 </body>
 </html>
