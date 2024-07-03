@@ -76,7 +76,6 @@ img{
 }
 
 #barra-ricerca .fa-magnifying-glass{
-    position: absolute;
     top: 50%;
     left: 15px; /* distanza dal bordo sinistro */
     transform: translateY(-50%);
@@ -142,14 +141,12 @@ img{
 
 .orario-messaggio-utente{
     color: #ccc;
-    position: absolute;
     top: 80%;
     right: 4%;
 }
 
 .orario-messaggio-contatto{
     color: #ccc;
-    position: absolute;
     top: 79%;
     left: 90%;
 }
