@@ -77,14 +77,12 @@
                     </div>
                     <!-- SCHERMATA MESSAGGI -->
                     <div id="messaggistica">
-                        <div v-for="(message, index) in getMessages()" :class="{'d-flex justify-end': message.sender === 'user', 'd-flex justify-start': message.sender === 'contact'}" class="message-container" @contextmenu.prevent="showDropdown(index, $event)">
+                        <div v-for="(message, index) in getMessages()" :class="{'d-flex justify-end': message.sender === 'user', 'd-flex justify-start': message.sender === 'contact'}" class="message-container" @contextmenu.prevent>
                             <div :class="message.sender === 'user' ? 'message-user' : 'message-contact'" class="d-flex align-items-center pos-relative">
                                 {{ message.content }} 
                                 <span :class="message.sender === 'user' ? 'orario-messaggio-utente f-size-50' : 'orario-messaggio-contatto f-size-50'">{{ message.time }}</span>
-                            </div>
-                            <div v-if="dropdownIndex === index" class="dropdown" :style="{ top: dropdownY + 'px', left: dropdownX + 'px' }">
-                                <button @click="confirmDeleteMessage(index)">Conferma</button>
-                                <button @click="cancelDelete">Annulla</button>
+                                <!-- Aggiungi la "x" per la cancellazione -->
+                                <span class="delete-message" @click="confirmDeleteMessage(index)">&#10006;</span>
                             </div>
                         </div>
                     </div>
